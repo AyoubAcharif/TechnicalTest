@@ -22,17 +22,18 @@ Optimisation du Rendu de Monnaie.
 
 4. **Installer les Dépendances :** Exécutez la commande suivante pour installer les dépendances nécessaires :
 
-   
     $npm install
+   ou
+    $npm install readline
     
 
-5. **Exécution du Programme :** Lancez le programme en utilisant la commande suivante :
+6. **Exécution du Programme :** Lancez le programme en utilisant la commande suivante :
 
     
    $node index.js
     
 
-6. **Suivez les Instructions :** Entrez le montant que vous souhaitez rendre lorsque vous êtes invité, puis suivez les instructions pour voir la solution optimale.
+7. **Suivez les Instructions :** Entrez le montant que vous souhaitez rendre lorsque vous êtes invité, puis suivez les instructions pour voir la solution optimale.
 
 ## Exemples
 
