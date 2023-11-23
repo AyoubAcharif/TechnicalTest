@@ -17,7 +17,7 @@ Optimisation du Rendu de Monnaie.
 3. **Accéder au Répertoire :** Allez dans le répertoire du projet avec la commande :
 
     
-    $cd rendu-de-monnaie
+    $cd TechnicalTest
    
 
 4. **Installer les Dépendances :** Exécutez la commande suivante pour installer les dépendances nécessaires :
