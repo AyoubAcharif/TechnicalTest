@@ -1,3 +1,5 @@
+// Date: 26/11
+
 /*  By Acharif Ayoub*/
 
 /**
@@ -19,36 +21,34 @@ const rl = readline.createInterface({
 
 function rendreMonnaie(montant) {
     const billets = [10, 5, 2];
-    let rendu = [];
+    let meilleureSolution = null;
 
-    for (const billet of billets) {
-        while (montant >= billet) {
-            montant -= billet;
-            rendu.push(billet);
-        }
-    }
-
-    if (montant === 0) {
-        return rendu;
-    } else {
-        // Réinitialiser montant et rendu pour réessayer avec une nouvelle approche
-        montant += rendu.pop();
-        rendu = [];
-
-        const reverseBillets = billets.slice().reverse(); // Copie du tableau billets + inversion
-
-        for (const billet of reverseBillets) {
-            while (montant >= billet) {
-                montant -= billet;
-                rendu.push(billet);
+    function recursiveRendreMonnaie(index, restant, solutionTempo) {
+        if (restant === 0) {
+            // La solution partielle est valide
+            if (meilleureSolution === null || solutionTempo.length < meilleureSolution.length) {
+                meilleureSolution = solutionTempo.slice();
             }
+            return;
         }
 
-        return montant === 0 ? rendu : null;    // Si montant = 0 alors on retourne rendu sinon on retourne null
-    }
-}
+        if (index < billets.length) {
+            // Essayer d'utiliser le billet actuel
+            if (restant >= billets[index]) {
+                solutionTempo.push(billets[index]);
+                recursiveRendreMonnaie(index, restant - billets[index], solutionTempo);
+                solutionTempo.pop(); // Retirer le dernier billet pour essayer d'autres possibilités
+            }
 
-/** Parti Affichage et Ecriture */
+            // Passer au billet suivant
+            recursiveRendreMonnaie(index + 1, restant, solutionTempo);
+        }
+    }
+
+    recursiveRendreMonnaie(0, montant, []);
+
+    return meilleureSolution;
+}
 
 rl.question('Entrez le montant à rendre : ', (montantSaisi) => {
     const montantARendre = parseInt(montantSaisi);
@@ -62,7 +62,7 @@ rl.question('Entrez le montant à rendre : ', (montantSaisi) => {
         console.log(`Montant à rendre : ${montantARendre}$`);
         console.log('Solution optimale :');
 
-        if (solutionOptimale === null) {
+        if (solutionOptimale === null || solutionOptimale.length === 0) {
             console.log('Aucune solution');
         } else {
             for (let i = 0; i < solutionOptimale.length; i++) {
